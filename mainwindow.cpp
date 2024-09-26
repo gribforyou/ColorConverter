@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->y->setRange(0, 100);
     ui->z->setRange(0, 100);
 
-    ui->errorLabel->setText("Status:");
+    ui->errorLabel->setText("");
     ui->errorLabel->update();
 
     connect(ui->showDialog, SIGNAL(clicked()), this, SLOT(useDialog()));
@@ -109,6 +109,7 @@ void MainWindow::hsv(QColor color){
 
 void MainWindow::changeRGB(){
     if(!isChanging){
+        ui->errorLabel->setText("");
         isChanging = true;
         curColor->setRgb(ui->red->value(), ui->green->value(), ui->blue->value());
         updateAllWithoutRGB();
@@ -120,6 +121,7 @@ void MainWindow::changeRGB(){
 void MainWindow::changeHSV()
 {
     if(!isChanging){
+        ui->errorLabel->setText("");
         isChanging = true;
         curColor->setHsv(ui->hue->value(), ui->saturation->value(), ui->value->value());
         updateAllWithoutHSV();
@@ -130,6 +132,7 @@ void MainWindow::changeHSV()
 void MainWindow::changeXYZ()
 {
     if(!isChanging){
+        ui->errorLabel->setText("");
         isChanging = true;
 
         double x = (double)(ui->x->value())/(double)100;
@@ -211,7 +214,6 @@ void MainWindow::updateAllWithoutRGB()
 
 void MainWindow::updateAllWithoutHSV()
 {
-    ui->errorLabel->setText("");
     ui->errorLabel->update();
 
     rgb(*curColor);
@@ -225,7 +227,6 @@ void MainWindow::updateAllWithoutHSV()
 
 void MainWindow::updateAllWithoutXYZ()
 {
-    ui->errorLabel->setText("");
     ui->errorLabel->update();
 
     hsv(*curColor);
@@ -239,7 +240,6 @@ void MainWindow::updateAllWithoutXYZ()
 
 void MainWindow::updateAll()
 {
-    ui->errorLabel->setText("");
     ui->errorLabel->update();
 
     rgb(*curColor);
